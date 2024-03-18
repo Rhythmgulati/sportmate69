@@ -1,0 +1,84 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+    <link rel="stylesheet" href="chat.css" />
+  </head>
+  <body>
+ 
+
+    <div class="container">
+      <div class="box"></div>
+      <div class="field">
+        <input
+          type="text"
+          class="mess"
+          id="mess"
+          placeholder="Write Messages"
+        />
+        <button type="button" class="send" id="send">Send</button>
+      </div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+  const socket = io(); 
+  const box = document.querySelector('.box'); 
+  const send = document.getElementById('send');
+  const input = document.getElementById('mess');
+ 
+const queryParams = new URLSearchParams(window.location.search);
+
+
+const email = queryParams.get('email');
+const id = queryParams.get('id');
+
+
+
+
+  send.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    const message = input.value.trim();
+    if (message !== '') {
+      socket.emit('user-message', message,id);
+      input.value = '';
+    }else{
+         alert('empty message')
+    }
+  });
+
+  socket.on('server-message', (msg) => {
+    append(msg, 'server'); 
+   
+    console.log("server "+msg)
+  
+  
+  });
+
+  function append(msg, type) {
+    const p = document.createElement('p');
+    p.innerText = msg;
+    p.classList.add(type);
+    box.appendChild(p);
+    
+const audio = new Audio('./sound/not.mp3');
+
+audio.play();
+
+  }
+
+  window.addEventListener('beforeunload', () => {
+  socket.emit('chat-disconnect');
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+   socket.emit('chatroom', email,id);
+    
+ 
+});
+</script>
+
+  </body>
+</html>
