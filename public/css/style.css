@@ -100,7 +100,7 @@ img.run{
 
 
 .cardtext{
-
+ margin-top: 20px;
     color: white;
     text-align:start;
 }
@@ -173,7 +173,7 @@ img.run{
     justify-content: start;
     align-items: start;
     flex-direction: column;
-    padding: 8px;
+    padding: 18px;
     overflow: hidden;
   
     
