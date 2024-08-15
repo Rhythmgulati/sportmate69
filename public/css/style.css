@@ -1,6 +1,6 @@
 body{
     
-    background-color: black;
+    background-color: #161B5F;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -8,9 +8,6 @@ body{
     margin-top: 5vh;
     width: 100vw;
     justify-content: center;
-    background-image: url(../img/bg3.png);
-    background-repeat: no-repeat;
-    background-size: cover;
     background-position: center;
     padding-top: 56px; /* Adjust this value based on your navbar height */
 --varred-- : #fe3f5e;
